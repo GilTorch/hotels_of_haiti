@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
+require "terminal-table"
 require "hotels_of_haiti"
 
-puts "Hello World"
+HotelsOfHaiti::CLI.new.call
