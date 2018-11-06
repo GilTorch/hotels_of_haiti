@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
+require "pry"
+require "nokogiri"
+require "open-uri"
 require "terminal-table"
 require "hotels_of_haiti"
 
-HotelsOfHaiti::CLI.new.call
+
+HotelsOfHaiti::Scraper.scrape_all
