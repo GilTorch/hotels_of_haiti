@@ -5,6 +5,7 @@ require "pry"
 require "nokogiri"
 require "open-uri"
 require "terminal-table"
+require "tty-spinner"
 require "hotels_of_haiti"
 
 

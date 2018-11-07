@@ -10,7 +10,9 @@ class HotelsOfHaiti::Scraper
     end
 
     def self.scrape_all 
-        
+        spinner = TTY::Spinner.new(":spinner Scraping hotels ...")
+        spinner.auto_spin 
+
         docs = Nokogiri::HTML(open(URL))
         main_node=docs.css(".entry-content")
         # each 'h4' is associated with a 'table' to form a the hotel 
@@ -69,6 +71,7 @@ class HotelsOfHaiti::Scraper
             break if hotel_index == max_to_scrape-1
             hotel_index+=1
         end
+        spinner.stop('Done!')
     end
 
 end

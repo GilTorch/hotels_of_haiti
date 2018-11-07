@@ -4,6 +4,7 @@ PATH
     hotels_of_haiti (0.1.0)
       nokogiri
       terminal-table
+      tty-spinner
 
 GEM
   remote: https://rubygems.org/
@@ -33,6 +34,9 @@ GEM
     rspec-support (3.8.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    tty-cursor (0.6.0)
+    tty-spinner (0.8.0)
+      tty-cursor (>= 0.5.0)
     unicode-display_width (1.4.0)
 
 PLATFORMS
