@@ -1,4 +1,4 @@
-require_relative 'hotel.rb'
+
 
 class HotelsOfHaiti::Scraper 
     
@@ -13,19 +13,16 @@ class HotelsOfHaiti::Scraper
         
         docs = Nokogiri::HTML(open(URL))
         main_node=docs.css(".entry-content")
-        cities=main_node.css("h2")
         # each 'h4' is associated with a 'table' to form a the hotel 
         hotel_names=main_node.css("h4") 
         hotel_infos_table=main_node.css("table")
-        
-        number_of_hotels=hotel_names.count 
         hotel_index=0 
 
-        hotels=[]
+        max_to_scrape=hotel_names.count
 
         loop do 
             hotel = {}
-
+            
             name = hotel_names[hotel_index].text
             hotel[:name]=name
 
@@ -66,30 +63,12 @@ class HotelsOfHaiti::Scraper
              #binding.pry
             # puts hotel
             #binding.pry
-            Hotel.new(hotel)
+            hotel_instance=Hotel.new(hotel)
+            #binding.pry
             #puts Hotel.all
-            break if hotel_index == number_of_hotels-1
+            break if hotel_index == max_to_scrape-1
             hotel_index+=1
         end
-
-        binding.pry
-        # puts Hotel.all
-        
-        # number_of_hotels=hotel_names.count 
-        # hotel_index=0
-        # number_of_hotels.times do 
-        #     hotel=Hotel.new(hotel_names[hotel_index].text)
-        #     infos=hotel_infos_table[hotel_index]
-            
-        #     infos.count.times do 
-            
-        #     end
-            
-        #     hotel_index+=1
-        # end
-
-        
-        #binding.pry
     end
 
 end

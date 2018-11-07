@@ -8,4 +8,4 @@ require "terminal-table"
 require "hotels_of_haiti"
 
 
-HotelsOfHaiti::Scraper.scrape_all
+HotelsOfHaiti::CLI.new.call

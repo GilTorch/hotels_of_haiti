@@ -1,22 +1,25 @@
 class HotelsOfHaiti::CLI 
     def call 
-        puts "Welcome to 'Hotels of Haiti'. Choose a city to see its list of hotels."
-        list_cities
+        HotelsOfHaiti::Scraper.scrape_all
+        puts "Welcome to 'Hotels of Haiti'"
         menu
+        list_hotels
     end
 
-    def list_cities 
-        puts "1. Cap-Haitien - 38 hotels"
-        puts "2. Gonaives - 3 hotels"
-        puts "3. Cayes - 4 hotels "
+    def list_hotels
+        Hotel.all.each_with_index do |hotel,index|
+            break if index==@input
+            puts "#{index+1}.-  #{hotel.name} - #{hotel.address}"
+        end
     end
 
-    def list_hotels_in_city(city)
-    end
 
     def menu 
-       puts "Enter your choice (number or name of city)"
-       input=gets.strip 
-
+       
+       loop do 
+        puts "How many hotels do you want to see?(Choose between 1 and #{Hotel.all.count})."
+        @input=gets.strip.to_i
+        break if @input!=0 && @input <= Hotel.all.count 
+       end 
     end
 end

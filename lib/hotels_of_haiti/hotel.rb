@@ -12,11 +12,14 @@ class Hotel
         @website=website 
         @pricing=pricing
         @@all << self 
-        puts @@all
     end
 
     def self.all 
         @@all
+    end
+
+    def self.hotels_by_range(range)
+        
     end
 
 end
