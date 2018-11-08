@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+After installing your gem, open your terminal and run `hotels_of_haiti`. That's all!
 
 ## Development
 
