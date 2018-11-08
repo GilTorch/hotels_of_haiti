@@ -1,3 +1,8 @@
+require "pry"
+require "nokogiri"
+require "open-uri"
+require "terminal-table"
+require "tty-spinner"
 require "hotels_of_haiti/version"
 require "hotels_of_haiti/cli"
 require "hotels_of_haiti/hotel"
