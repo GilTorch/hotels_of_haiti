@@ -1,7 +1,6 @@
 class HotelsOfHaiti::CLI 
     def call 
         HotelsOfHaiti::Scraper.scrape_all
-        binding.pry
         puts "Welcome to 'Hotels of Haiti'"
         launch
     end
@@ -17,7 +16,6 @@ class HotelsOfHaiti::CLI
        loop do 
         puts "How many hotels do you want to see?(Choose between 1 and #{Hotel.all.count})."
         @range=gets.strip.to_i
-        #binding.pry
         break if @range!=0 && @range <= Hotel.all.count 
        end 
        list_hotels 
@@ -36,9 +34,8 @@ class HotelsOfHaiti::CLI
     def show_hotel 
         input=nil
         loop do 
-            puts "Which hotel you want to see more detail about??"
+            puts "Which hotel you want to see more detail about(Choose by ID)??"
             input=gets.strip.to_i 
-            #binding.pry
             break if input<=@range
         end
         found_hotel=Hotel.find_by_id(input-1)

@@ -3,11 +3,7 @@
 class HotelsOfHaiti::Scraper 
     
     URL="https://www.haiti-reference.com/pages/plan/geographie-et-tourisme/tourisme-en-haiti/hotels-provinces/"
-    
-    private 
-    def convert_unicode_to_string(str)
-        str.encode('iso-8859-1').force_encoding('cp1252').encode('utf-8') 
-    end
+
 
     def self.scrape_all 
         spinner = TTY::Spinner.new(":spinner Scraping hotels ...")
@@ -62,12 +58,7 @@ class HotelsOfHaiti::Scraper
                         end
                  end 
              end
-             #binding.pry
-            # puts hotel
-            #binding.pry
             hotel_instance=Hotel.new(hotel)
-            #binding.pry
-            #puts Hotel.all
             break if hotel_index == max_to_scrape-1
             hotel_index+=1
         end
