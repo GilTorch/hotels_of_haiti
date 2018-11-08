@@ -2,24 +2,59 @@ class HotelsOfHaiti::CLI
     def call 
         HotelsOfHaiti::Scraper.scrape_all
         puts "Welcome to 'Hotels of Haiti'"
-        menu
-        list_hotels
+        launch
     end
 
     def list_hotels
-        Hotel.all.each_with_index do |hotel,index|
-            break if index==@input
-            puts "#{index+1}.-  #{hotel.name} - #{hotel.address}"
-        end
+        # Hotel.all.each_with_index do |hotel,index|
+        #     break if index==@input
+        #     puts "#{index+1}.-  #{hotel.name} - #{hotel.address}"
+        # end
+        
+        fields=['ID','NAME']
+        table = Terminal::Table.new :title =>"LIST OF HOTELS",:headings =>fields, :rows => Hotel.hotels_to_array(@range), :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+        puts table
     end
 
 
-    def menu 
-       
+    def launch
        loop do 
         puts "How many hotels do you want to see?(Choose between 1 and #{Hotel.all.count})."
-        @input=gets.strip.to_i
-        break if @input!=0 && @input <= Hotel.all.count 
+        @range=gets.strip.to_i
+        #binding.pry
+        break if @range!=0 && @range <= Hotel.all.count 
        end 
+       list_hotels 
+       show_hotel 
+       puts "Do you which to go back to the hotel list?(type yes or no)"
+       input=gets.strip
+
+       if input.downcase=="yes"
+        launch 
+       else 
+        puts "Good bye!"
+       end
+
     end
+
+    def show_hotel 
+        input=nil
+        loop do 
+            puts "Which hotel you want to see more detail about??"
+            input=gets.strip.to_i 
+            #binding.pry
+            break if input<=@range
+        end
+        found_hotel=Hotel.find_by_id(input-1)
+        puts "X-------------------------------------------------X"
+        puts "         #{found_hotel.name}                "
+        puts "X-------------------------------------------------X"
+        # puts "Name: #{found_hotel.name}"
+        puts "Address: #{found_hotel.address}"
+        puts "Phone: #{found_hotel.phone}"
+        puts "E-mail: #{found_hotel.email}"
+        puts "Website: #{found_hotel.website}"
+        puts "Pricing: #{found_hotel.pricing}"
+    end
+
 end
