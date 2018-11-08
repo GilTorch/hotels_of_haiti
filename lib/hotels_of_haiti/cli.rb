@@ -1,18 +1,14 @@
 class HotelsOfHaiti::CLI 
     def call 
         HotelsOfHaiti::Scraper.scrape_all
+        binding.pry
         puts "Welcome to 'Hotels of Haiti'"
         launch
     end
 
     def list_hotels
-        # Hotel.all.each_with_index do |hotel,index|
-        #     break if index==@input
-        #     puts "#{index+1}.-  #{hotel.name} - #{hotel.address}"
-        # end
-        
-        fields=['ID','NAME']
-        table = Terminal::Table.new :title =>"LIST OF HOTELS",:headings =>fields, :rows => Hotel.hotels_to_array(@range), :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+        fields=["ID",'NAME']
+        table = Terminal::Table.new :title =>"LIST OF HOTELS",:headings =>fields, :rows => Hotel.hotels_to_array(@range,[:id,:name]), :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
         puts table
     end
 
